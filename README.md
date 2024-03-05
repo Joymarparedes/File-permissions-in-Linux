@@ -1,35 +1,38 @@
-<h1>Active Directory Home Lab</h1>
+<h1>File permissions in Linux</h1>
 
 
 
 <h2>Description</h2>
-In this project an Active Directory home lab Enviroment is created using Oracle Virtual Box. Configuring and running this
-lab helped me develop an understanding of how active directory and windows networking works.
+The research team at my organization needs to update the file permissions for certain files and
+directories within the "projects" directory. The permissions do not currently reflect the level of
+authorization that should be given. Checking and updating these permissions will help keep their system secure.
 <br />
 
+<h2>Check file and directory details:</h2>
 
-<h2>Languages and Utilities Used</h2>
+The following code demostrates how I used Linux commands to determine the existing permissions set for  a specific directory in the file system: <br/>
 
-- <b>PowerShell</b> 
-- <b>VirtualBox</b>
-
-<h2>Environments Used </h2>
-
-- <b>Windows 10</b> (21H2)
-- <b>Windows server 2019</b> 
-
-<h2>Program walk-through:</h2>
-
-<p align="center">
-we create our first virtual machine which is going to be our domain controller and is going to house active directory: <br/>
-<img src="https://i.imgur.com/aJzy5sv.png" height="80%" width="80%" alt="Create Virtual Machine"/>
+<img src="https://i.imgur.com/2I1Q8T6.png" height="80%" width="80%" alt="Create Virtual Machine"/>
 <br />
+The first line of the screenshot displays the command I entered. and the other lines display the 
+ output. The code list all contents of the "projects" directory. I used the ls command with the
+ -la option to display a detailed listing of the file content that also returned hidden files. The
+ output of my command indicates that there is one directory named "dreafts", oned hidden file 
+ named. "project_c.txt, and five othe project files. The 10-character string in the first 
+ column represents the permissions set on each file or directory. 
 <br />
 installing Windows server 2019 on virtual machine :  <br/>
 <img src="https://i.imgur.com/Pqa1zWX.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
-<br />
-Setting up internal NIC with these specifications for this lab: <br/>
+
+<h2>Describe the permissions string</h2>
+
+The 10-character string can be deconstructed to determine who is authorized to access the
+file and their spacific permissions. The characters and what they represent are as follows:
+
+- 1st character: This chracter is either a "d" or hyphen (-) and idicates the file typed. if it's
+  a "d", it's a directory . if it's a hyphen (-), it's a regular file. 
+
 <img src="https://i.imgur.com/JLaRThB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
