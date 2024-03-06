@@ -2,7 +2,7 @@
 
 
 
-<h2>Description</h2>
+<h2>Project Description</h2>
 The research team at my organization needs to update the file permissions for certain files and
 directories within the "projects" directory. The permissions do not currently reflect the level of
 authorization that should be given. Checking and updating these permissions will help keep their system secure.
@@ -20,78 +20,96 @@ The first line of the screenshot displays the command I entered. and the other l
  output of my command indicates that there is one directory named "dreafts", oned hidden file 
  named. "project_c.txt, and five othe project files. The 10-character string in the first 
  column represents the permissions set on each file or directory. 
-<br />
-installing Windows server 2019 on virtual machine :  <br/>
-<img src="https://i.imgur.com/Pqa1zWX.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
 
-<h2>Describe the permissions string</h2>
+<h2>Describe the permissions string:</h2>
 
 The 10-character string can be deconstructed to determine who is authorized to access the
-file and their spacific permissions. The characters and what they represent are as follows:
+file and their specific permissions. The characters and what they represent are as follows:
 
-- 1st character: This chracter is either a "d" or hyphen (-) and idicates the file typed. if it's
-  a "d", it's a directory . if it's a hyphen (-), it's a regular file. 
+- 1st character: This character is either a "d" or hyphen "-" and indicates the file type. If it's
+  a "d", it's a directory. if it's a hyphen "-", it's a regular file.
+- 2nd-4th characters: These characters indicate the read "r". write "w", and execute "x"
+  permissions for the user. When one of thse characters is a hyphen "-" instead, it
+   indicates that this permission is not granted to the user.
+- 5th-7th characters: These characters indicate the read "r", write "w", and execute "x"
+  permissions for the group. When one of these characters is a hyphen (-) instead, it
+  indicates that this permission is not granted for the group.
+- 8th-10th characters: These characters indicate the read "r", write "w", and execute "x"
+  permissions for other. This owner type consists of all other users on the system apart
+  from the user and the group. When one of these characters is a hyphen "-" instead,
+  that indicates that this permission is not granted for other.
 
-<img src="https://i.imgur.com/JLaRThB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+For example, the file permissions for "project_t.txt" are "-rw-rw-r--". Since the first
+character is a hyphen "-", this indicates that "project_t.txt" is a file, not a directory. The
+second, fifth, and eighth characters are all "r", which indicated that suer, group, and other all have
+read permissions. The third and sixth characters are "w", which indicates that only the user and 
+group have write permissions. No one has execute permissions for "project_t.txt."
 <br />
+
+<h2>Change file permissions:</h2>
+
+The organization determined that other shouldn't have write access to any of their files. To
+comply with this, I referred to the file permissions that I previously returned. I determined
+"project_k.txt" must have the write access removed for other.
+
+The following code demonstrates how I used Linux commands to do this:
+
+
+<img src="https://i.imgur.com/O6YASUE.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
-Next we are going to install active directory using "Add Roles and Features Wizard":  <br/>
-<img src="https://i.imgur.com/vTHLwdE.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
+The first two lines of the screenshot display the commands I entered, and the other lines
+display the output of the second command. The "chmod" command the permissions on
+files and directories. the first argument indicates what permissions shoud be changed, and
+the second argument specifies the file or directory. In this example, I removed write
+permissions from other for the "project_k.txt" file After this, I used "ls -la" to review the
+updates I made. 
+
+
+<h2>Change file permissions on a hidden file</h2>
+
+The research team at my organization recently archived "project_x.txt. They do not want 
+anyone to have write access to this project, but the user and group should have read access.
+
+The following code demonstrates how I used Linux commands to change the permissions:
+
+<img src="https://i.imgur.com/hwTvzSS.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
+
+The first two lines of the screenshot display the commands I entered, and the other lines
+display the output of the second command. I know ".project_x.txt" is a hidden file because
+it starts with a period ".". In this example, I removed write permissions from the user and
+group, and added read permissions to the group. I removed write permissions from the user
+with "u-w". Then, I removed write permissions from the group with "g-w", and added read 
+permissions to the group with "g+r".
+
+<h2>Change directory permissions</h2>
+
 <br />
-After the installation we have to make sure to go through "Post-deployment Configuration":  <br/>
-<img src="https://i.imgur.com/MiloSEJ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+My organization only wants the "researcher2" user to have access to the "drafts" directory
+and its contents. This means that no one other than "researcher2" should have execute
+permissions.
+
+The following code demonstrates how I used Linux commands to change the permissions:  <br/>
+<img src="https://i.imgur.com/mKZMQ19.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
+
+The first two lines of the screenshot display the commands I entered, and the other lines
+display the output of the second command. I previously determined that the group had
+execute permissions, so I used the "chmod" command to remove them. The "researcher3" user
+already had execute permissions, so they did not need to be added.
+
+
+<h2>Summary</h2>
+
 <br />
-Next we install RAS:  <br/>
-<img src="https://i.imgur.com/uDqnAg8.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+I changed multiple permissions to match the level of authorization my organization wanted for
+files and directories in the "projects" directory. The first step in this was using "ls -la" to
+check the permissions for the directory. This informed my decisions in the following steps. I
+then used the "chmod" command multiple times to change the permissions on files and 
+directories.
 <br />
-<br />
- And then we install our NAT:  <br/>
-<img src="https://i.imgur.com/tT3Ksga.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
- After RAS and NAT are installed and configured with continue with installing DHCP Server :  <br/>
-<img src="https://i.imgur.com/VF8NfGy.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-After we install DHCP server we go ahead and create our scope with the specifications provided
- in this case we use these ones for the lab:  <br/>
-<img src="https://i.imgur.com/4PVCR9V.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
- Next we have a provided list of users and we are going to use PowerShell to run this
- script which will allow us to create multiple users with the information provided on the .txt file:  <br/>
-<img src="https://i.imgur.com/Ui9puD3.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-  We are using PowerShell and the provided script to automate this process:  <br/>
-<img src="https://i.imgur.com/v1iBUQ8.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
- After Powershell is done you will notice that all these users have been created:  <br/>
-<img src="https://i.imgur.com/4wvjaxT.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
- The last thing we are doing is creating our Client:  <br/>
-<img src="https://i.imgur.com/0MQKQRM.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-We attach it to internal network so we can get a DHCP adress from the domain controller:  <br/>
-<img src="https://i.imgur.com/v4UzcN7.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
- After our Client is completed we check the Ethernet adapter and also ping an adress on the internet to make sure our infrastructure is working:  <br/>
-<img src="https://i.imgur.com/kyGU7in.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
- Now that we now that our client is working correctly, we just rename it with the pertinent information and make it a member of the domain:  <br/>
-<img src="https://i.imgur.com/ERctLK9.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-We can also make sure the Client is working correctly by checking its connection to DHCP and also in the Active Directory:  <br/>
-<img src="https://i.imgur.com/EmpB4B9.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
 </p>
 
 <!--
